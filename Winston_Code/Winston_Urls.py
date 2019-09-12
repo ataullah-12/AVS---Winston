@@ -1,0 +1,5 @@
+winston = "https://avs-eu.aka.amazon.com/EU/task/"
+case_Data = "C:\\Users\\shariemo\\PycharmProjects\\Ataulla\Winston Resolver\\Case_data.xlsx"
+vendor_data = "C:\\Users\\shariemo\\PycharmProjects\\Ataulla\Winston Resolver\\Vendor Sheets\\"
+file_path = "C:\\Users\\shariemo\\PycharmProjects\\Ataulla\\Winston Resolver\\Vendor Sheets\\"
+upload_xpath = "//div[@class='col-m-6 col-xxs-12']//div//div//div[@class='awsui-row']//div[@class='col-m-12 col-xxs-12']//awsui-form-field//div[@class='awsui-form-field awsui-form-field-stretch']//div[@class='awsui-grid awsui-form-field-controls']//div[@class='awsui-row']//div[@class='awsui-form-field-control col-xxxs-12 col-xs-9']//span//div//input"
