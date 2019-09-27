@@ -62,8 +62,13 @@ status.click()
 resolve = driver.find_element_by_xpath('//*[@id="awsui-select-1-dropdown-option-2"]/div/div/div[1]/span[1]')
 resolve.click()
 
+# Adding user ID in the Winston Case
+
+iframe_corres = driver.find_element_by_xpath("//awsui-modal[@class='winston-container']//b[contains(text(),'Resolution description')]//parent::span//parent::label//parent::div//parent::awsui-form-field//iframe[@class='cke_wysiwyg_frame cke_reset']")
 driver.switch_to.frame(iframe_corres)
-# driver.find_element_by_tag_name("body").click()
-driver.find_element_by_tag_name("body").send_keys("login @mmohdat")
+driver.find_element_by_tag_name("body").find_element_by_tag_name("p").send_keys("@mmohdat")
 driver.switch_to.default_content()
 time.sleep(1)
+
+# driver.find_element_by_tag_name("body").click()
+# driver.execute_script("arguments[0].textContent='@mmohdat';", elem)
