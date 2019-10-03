@@ -24,8 +24,8 @@ user_id = Excel_utils.readData(url.case_Data, 'Data', 2, 7)
 
 driver.get(f"{url.winston}{case}")
 driver.implicitly_wait(15)
-driver.find_element_by_xpath(f"{url.upload_xpath}").send_keys(f"{url.file_path}{vendor}.xlsx")
-# time.sleep(3)
+# driver.find_element_by_xpath(f"{url.upload_xpath}").send_keys(f"{url.file_path}{vendor}.xlsx")
+# # time.sleep(3)
 
 """
 In the below code we are entering into an iframe to write into correspondence.
@@ -35,43 +35,43 @@ driver.find_element_by_tag_name("body").send_keys("musa bhai") - Tying informati
 driver.switch_to.default_content() - switching back to html to proceed with further actions. 
 """
 
-wait.until(EC.element_to_be_clickable((By.XPATH, "//iframe[@class='cke_wysiwyg_frame cke_reset']")))
-iframe_corres = driver.find_element_by_xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']")
-driver.switch_to.frame(iframe_corres)
-driver.find_element_by_tag_name("body").send_keys("This case is being tested for auto - resolution python script")
-driver.switch_to.default_content()
-
-## Winston Status
-wait.until(EC.element_to_be_clickable((By.ID, "awsui-select-1-textbox")))
-status = driver.find_element_by_id('awsui-select-1-textbox')
-status.click()
-
+# wait.until(EC.element_to_be_clickable((By.XPATH, "//iframe[@class='cke_wysiwyg_frame cke_reset']")))
+# iframe_corres = driver.find_element_by_xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']")
+# driver.switch_to.frame(iframe_corres)
+# driver.find_element_by_tag_name("body").send_keys("This case is being tested for auto - resolution python script")
+# driver.switch_to.default_content()
+#
+# # Winston Status
+# wait.until(EC.element_to_be_clickable((By.ID, "awsui-select-1-textbox")))
+# status = driver.find_element_by_id('awsui-select-1-textbox')
+# status.click()
+#
 # ## Select pending status
-wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="awsui-select-1-dropdown-option-2"]/div/div/div[1]/span[1]')))
-pending = driver.find_element_by_xpath('//*[@id="awsui-select-1-dropdown-option-2"]/div/div/div[1]/span[1]')
-pending.click()
-
+# wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="awsui-select-1-dropdown-option-2"]/div/div/div[1]/span[1]')))
+# pending = driver.find_element_by_xpath('//*[@id="awsui-select-1-dropdown-option-2"]/div/div/div[1]/span[1]')
+# pending.click()
+#
 # ## Selecting Pending Reason
-
-wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div/div/div/awsui-app-layout/div/main/div[2]/div/span/div/div/div/div/div[9]/awsui-modal/div[2]/div/div/div[2]/div/span/div/div[1]/div/awsui-form-field/div/div/div/div/span/awsui-select/div/div/awsui-select-trigger/div/div/span")))
-pending_reason_dd = driver.find_element_by_xpath('/html/body/div[1]/div/div/div/awsui-app-layout/div/main/div[2]/div/span/div/div/div/div/div[9]/awsui-modal/div[2]/div/div/div[2]/div/span/div/div[1]/div/awsui-form-field/div/div/div/div/span/awsui-select/div/div/awsui-select-trigger/div/div/span')
-pending_reason_dd.click()
-
-wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='awsui-select-option-label'][text()='Pending for quality check']")))
-pending_reason = driver.find_element_by_xpath("//span[@class='awsui-select-option-label'][text()='Pending for quality check']")
-pending_reason.click()
-
-## Select 'Ok' button after 'Pending for quality check is made
-wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='awsui-modal-container awsui-modal-expandtofit']//button[@class='awsui-button awsui-button-variant-primary awsui-hover-child-icons']")))
-quality_check = driver.find_element_by_xpath("//div[@class='awsui-modal-container awsui-modal-expandtofit']//button[@class='awsui-button awsui-button-variant-primary awsui-hover-child-icons']")
-quality_check.click()
-# time.sleep(2)
-
-## Press update button
-wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="WinstonApp"]/div/div[8]/div/div[3]/div[2]/awsui-button/button/span')))
-update_t1 = driver.find_element_by_xpath('//*[@id="WinstonApp"]/div/div[8]/div/div[3]/div[2]/awsui-button/button/span')
-update_t1.click()
-# time.sleep(2)
+#
+# wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div/div/div/awsui-app-layout/div/main/div[2]/div/span/div/div/div/div/div[9]/awsui-modal/div[2]/div/div/div[2]/div/span/div/div[1]/div/awsui-form-field/div/div/div/div/span/awsui-select/div/div/awsui-select-trigger/div/div/span")))
+# pending_reason_dd = driver.find_element_by_xpath('/html/body/div[1]/div/div/div/awsui-app-layout/div/main/div[2]/div/span/div/div/div/div/div[9]/awsui-modal/div[2]/div/div/div[2]/div/span/div/div[1]/div/awsui-form-field/div/div/div/div/span/awsui-select/div/div/awsui-select-trigger/div/div/span')
+# pending_reason_dd.click()
+#
+# wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='awsui-select-option-label'][text()='Pending for quality check']")))
+# pending_reason = driver.find_element_by_xpath("//span[@class='awsui-select-option-label'][text()='Pending for quality check']")
+# pending_reason.click()
+#
+# ## Select 'Ok' button after 'Pending for quality check is made
+# wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='awsui-modal-container awsui-modal-expandtofit']//button[@class='awsui-button awsui-button-variant-primary awsui-hover-child-icons']")))
+# quality_check = driver.find_element_by_xpath("//div[@class='awsui-modal-container awsui-modal-expandtofit']//button[@class='awsui-button awsui-button-variant-primary awsui-hover-child-icons']")
+# quality_check.click()
+# # time.sleep(2)
+#
+# ## Press update button
+# wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="WinstonApp"]/div/div[8]/div/div[3]/div[2]/awsui-button/button/span')))
+# update_t1 = driver.find_element_by_xpath('//*[@id="WinstonApp"]/div/div[8]/div/div[3]/div[2]/awsui-button/button/span')
+# update_t1.click()
+# # time.sleep(2)
 
 """
 PART 2 - Checking...
@@ -99,6 +99,8 @@ driver.switch_to.default_content()
 # time.sleep(1)
 
 ## Selecting "Description of Work" dropdown
+
+
 
 wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="awsui-select-9-textbox"]')))
 desc_work = driver.find_element_by_xpath('//*[@id="awsui-select-9-textbox"]')
