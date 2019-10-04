@@ -28,7 +28,8 @@ for r in range(2, rows+1):
     case = Excel_utils.readData(url.case_Data, 'Data', r, 2)
     no_asins = Excel_utils.readData(url.case_Data, 'Data', r, 3)
     made_asins = Excel_utils.readData(url.case_Data, 'Data', r, 4)
-    user_id = Excel_utils.readData(url.case_Data, 'Data', r, 7)
+    user_id = Excel_utils.readData(url.case_Data, 'Data', 2, 7)
+    correspondence = Excel_utils.readData(url.case_Data, 'Data', 9, 7)
 
     driver.get(f"{url.winston}{case}")
     driver.implicitly_wait(15)
@@ -46,7 +47,7 @@ for r in range(2, rows+1):
     wait.until(EC.element_to_be_clickable((By.XPATH, "//iframe[@class='cke_wysiwyg_frame cke_reset']")))
     iframe_corres = driver.find_element_by_xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']")
     driver.switch_to.frame(iframe_corres)
-    driver.find_element_by_tag_name("body").send_keys("This case is being tested for auto - resolution python script")
+    driver.find_element_by_tag_name("body").send_keys(correspondence)
     driver.switch_to.default_content()
 
     ## Winston Status
@@ -152,7 +153,7 @@ for r in range(2, rows+1):
     time.sleep(3)
 
     """
-    Part 3 Checking...
+    Part 3
     """
 
     ## Removig incorrect login ID and adding resolvers login ID
