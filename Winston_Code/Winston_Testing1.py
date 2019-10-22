@@ -157,3 +157,6 @@ quality_check = driver.find_element_by_xpath("//div[@class='awsui-modal-containe
 quality_check.click()
 time.sleep(2) #TODO: Try and see if the code works without any error if the time is reduced to 1 second
 
+//span[text()='Proactive task']
+
+//*[@id="awsui-select-10-textbox"]//span[text()="Select the description of work"]

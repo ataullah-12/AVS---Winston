@@ -37,23 +37,10 @@ for r in range(2, rows+1):
 
         try:
             driver.find_element_by_xpath(f"{url.upload_xpath}").send_keys(f"{url.file_path}{vendor}.xlsx")
-            # time.sleep(3)
+            time.sleep(3)
         except:
             pass
-
-        """
-        In the below code we are entering into an iframe to write into correspondence.
-        iframe_corres=driver.find_element_by_xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']") - Assiging a variable to xpath of an iframe.
-        driver.switch_to.frame(iframe_corres) - switching from html to iframe
-        driver.find_element_by_tag_name("body").send_keys("musa bhai") - Tying information
-        driver.switch_to.default_content() - switching back to html to proceed with further actions. 
-        """
-
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//iframe[@class='cke_wysiwyg_frame cke_reset']")))
-        iframe_corres = driver.find_element_by_xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']")
-        driver.switch_to.frame(iframe_corres)
-        driver.find_element_by_tag_name("body").send_keys(correspondence)
-        driver.switch_to.default_content()
+            print("Unable to upload vendor file")
 
         ## Winston Status
 
@@ -61,9 +48,9 @@ for r in range(2, rows+1):
         status = driver.find_element_by_id('awsui-select-1-textbox')
         status.click()
 
-        # Select pending status
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="awsui-select-1-dropdown-option-2"]/div/div/div[1]/span[1]')))
-        pending = driver.find_element_by_xpath('//*[@id="awsui-select-1-dropdown-option-2"]/div/div/div[1]/span[1]')
+        # Making the case in Pending Status if it is in Assigned/WIP Status
+        wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Pending']")))
+        pending = driver.find_element_by_xpath("//span[text()='Pending']")
         pending.click()
 
         # Selecting Pending Reason
@@ -83,10 +70,26 @@ for r in range(2, rows+1):
         quality_check.click()
         # time.sleep(2)
 
+        """
+        In the below code we are entering into an iframe to write into correspondence.
+        iframe_corres=driver.find_element_by_xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']") - Assiging a variable to xpath of an iframe.
+        driver.switch_to.frame(iframe_corres) - switching from html to iframe
+        driver.find_element_by_tag_name("body").send_keys("musa bhai") - Tying information
+        driver.switch_to.default_content() - switching back to html to proceed with further actions.
+        """
+
+        wait.until(EC.element_to_be_clickable((By.XPATH, "//iframe[@class='cke_wysiwyg_frame cke_reset']")))
+        iframe_corres = driver.find_element_by_xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']")
+        driver.switch_to.frame(iframe_corres)
+        driver.find_element_by_tag_name("body").send_keys(correspondence)
+        driver.switch_to.default_content()
+
         ## Press update button
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="WinstonApp"]/div/div[8]/div/div[3]/div[2]/awsui-button/button/span')))
-        update_t1 = driver.find_element_by_xpath('//*[@id="WinstonApp"]/div/div[8]/div/div[3]/div[2]/awsui-button/button/span')
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '//*[@id="WinstonApp"]/div/div[8]/div/div[3]/div[2]/awsui-button/button/span')))
+        update_t1 = driver.find_element_by_xpath(
+            '//*[@id="WinstonApp"]/div/div[8]/div/div[3]/div[2]/awsui-button/button/span')
         update_t1.click()
         # time.sleep(2)
 
@@ -96,8 +99,8 @@ for r in range(2, rows+1):
 
         ## Pressing Resolve Button
 
-        wait.until(EC.element_to_be_clickable((By.ID, "awsui-select-1-textbox")))
-        status = driver.find_element_by_id('awsui-select-1-textbox')
+        wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='awsui-select-trigger-label'][contains(text(),'Pending')]")))
+        status = driver.find_element_by_xpath("//span[@class='awsui-select-trigger-label'][contains(text(),'Pending')]")
         status.click()
 
 
@@ -118,8 +121,9 @@ for r in range(2, rows+1):
         ## Selecting "Description of Work" dropdown
 
         # Select dropdown here
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="awsui-select-10-textbox"]//span[text()="Select the description of work"]')))
-        desc_work = driver.find_element_by_xpath('//*[@id="awsui-select-10-textbox"]//span[text()="Select the description of work"]')
+        # wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='awsui-dropdown-trigger awsui-select-trigger awsui-select-trigger-no-option awsui-select-trigger-variant-label']")))
+        time.sleep(2)
+        desc_work = driver.find_element_by_xpath("//div[@class='awsui-dropdown-trigger awsui-select-trigger awsui-select-trigger-no-option awsui-select-trigger-variant-label']")
 
         if desc_work.text != "Proactive task":
 
@@ -237,5 +241,7 @@ for r in range(2, rows+1):
         Excel_utils.writeData(url.case_Data, 'Result', r, 2, case)
         Excel_utils.writeData(url.case_Data, 'Result', r, 3, "Not Resolved. kindly check and report it to @shariemo")
         print(f"{vendor} code with {case} id has been not been resolved, kindly check and report it to @shariemo")
+
+driver.quit()
 
 print("Alhamdulillah, completed")
