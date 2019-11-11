@@ -46,52 +46,59 @@ for r in range(2, rows+1):
 
         wait.until(EC.element_to_be_clickable((By.ID, "awsui-select-1-textbox")))
         status = driver.find_element_by_id('awsui-select-1-textbox')
-        status.click()
 
-        # Making the case in Pending Status if it is in Assigned/WIP Status
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Pending']")))
-        pending = driver.find_element_by_xpath("//span[text()='Pending']")
-        pending.click()
+        print(status.text)
 
-        # Selecting Pending Reason
+        #Todo: if the status == 'Assigned', will change the login ID fix the issue? Clarify.
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div/div/div/awsui-app-layout/div/main/div[2]/div/span/div/div/div/div/div[9]/awsui-modal/div[2]/div/div/div[2]/div/span/div/div[1]/div/awsui-form-field/div/div/div/div/span/awsui-select/div/div/awsui-select-trigger/div/div/span")))
-        pending_reason_dd = driver.find_element_by_xpath('/html/body/div[1]/div/div/div/awsui-app-layout/div/main/div[2]/div/span/div/div/div/div/div[9]/awsui-modal/div[2]/div/div/div[2]/div/span/div/div[1]/div/awsui-form-field/div/div/div/div/span/awsui-select/div/div/awsui-select-trigger/div/div/span')
-        pending_reason_dd.click()
+        if status.text != "Pending":
+            status.click()
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='awsui-select-option-label'][text()='Pending for quality check']")))
-        pending_reason = driver.find_element_by_xpath("//span[@class='awsui-select-option-label'][text()='Pending for quality check']")
-        pending_reason.click()
+            # Making the case in Pending Status if it is in Assigned/WIP Status
+            wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Pending']")))
+            pending = driver.find_element_by_xpath("//span[text()='Pending']")
+            pending.click()
 
-        ## Select 'Ok' button after 'Pending for quality check is made
+            # Selecting Pending Reason
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='awsui-modal-container awsui-modal-expandtofit']//button[@class='awsui-button awsui-button-variant-primary awsui-hover-child-icons']")))
-        quality_check = driver.find_element_by_xpath("//div[@class='awsui-modal-container awsui-modal-expandtofit']//button[@class='awsui-button awsui-button-variant-primary awsui-hover-child-icons']")
-        quality_check.click()
-        # time.sleep(2)
+            wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div/div/div/awsui-app-layout/div/main/div[2]/div/span/div/div/div/div/div[9]/awsui-modal/div[2]/div/div/div[2]/div/span/div/div[1]/div/awsui-form-field/div/div/div/div/span/awsui-select/div/div/awsui-select-trigger/div/div/span")))
+            pending_reason_dd = driver.find_element_by_xpath('/html/body/div[1]/div/div/div/awsui-app-layout/div/main/div[2]/div/span/div/div/div/div/div[9]/awsui-modal/div[2]/div/div/div[2]/div/span/div/div[1]/div/awsui-form-field/div/div/div/div/span/awsui-select/div/div/awsui-select-trigger/div/div/span')
+            pending_reason_dd.click()
 
-        """
-        In the below code we are entering into an iframe to write into correspondence.
-        iframe_corres=driver.find_element_by_xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']") - Assiging a variable to xpath of an iframe.
-        driver.switch_to.frame(iframe_corres) - switching from html to iframe
-        driver.find_element_by_tag_name("body").send_keys("musa bhai") - Tying information
-        driver.switch_to.default_content() - switching back to html to proceed with further actions.
-        """
+            wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='awsui-select-option-label'][text()='Pending for quality check']")))
+            pending_reason = driver.find_element_by_xpath("//span[@class='awsui-select-option-label'][text()='Pending for quality check']")
+            pending_reason.click()
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//iframe[@class='cke_wysiwyg_frame cke_reset']")))
-        iframe_corres = driver.find_element_by_xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']")
-        driver.switch_to.frame(iframe_corres)
-        driver.find_element_by_tag_name("body").send_keys(correspondence)
-        driver.switch_to.default_content()
+            ## Select 'Ok' button after 'Pending for quality check is made
 
-        ## Press update button
+            wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='awsui-modal-container awsui-modal-expandtofit']//button[@class='awsui-button awsui-button-variant-primary awsui-hover-child-icons']")))
+            quality_check = driver.find_element_by_xpath("//div[@class='awsui-modal-container awsui-modal-expandtofit']//button[@class='awsui-button awsui-button-variant-primary awsui-hover-child-icons']")
+            quality_check.click()
+            # time.sleep(2)
 
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '//*[@id="WinstonApp"]/div/div[8]/div/div[3]/div[2]/awsui-button/button/span')))
-        update_t1 = driver.find_element_by_xpath(
-            '//*[@id="WinstonApp"]/div/div[8]/div/div[3]/div[2]/awsui-button/button/span')
-        update_t1.click()
-        # time.sleep(2)
+            """
+            In the below code we are entering into an iframe to write into correspondence.
+            iframe_corres=driver.find_element_by_xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']") - Assiging a variable to xpath of an iframe.
+            driver.switch_to.frame(iframe_corres) - switching from html to iframe
+            driver.find_element_by_tag_name("body").send_keys("musa bhai") - Tying information
+            driver.switch_to.default_content() - switching back to html to proceed with further actions.
+            """
+
+            wait.until(EC.element_to_be_clickable((By.XPATH, "//iframe[@class='cke_wysiwyg_frame cke_reset']")))
+            iframe_corres = driver.find_element_by_xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']")
+            driver.switch_to.frame(iframe_corres)
+            driver.find_element_by_tag_name("body").send_keys(correspondence)
+            driver.switch_to.default_content()
+
+            ## Press update button
+
+            wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Update task']")))
+            update_t1 = driver.find_element_by_xpath("//span[text()='Update task']")
+            update_t1.click()
+            # time.sleep(2)
+
+        else:
+            pass
 
         """
         PART 2 
@@ -99,8 +106,8 @@ for r in range(2, rows+1):
 
         ## Pressing Resolve Button
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//span[@class='awsui-select-trigger-label'][contains(text(),'Pending')]")))
-        status = driver.find_element_by_xpath("//span[@class='awsui-select-trigger-label'][contains(text(),'Pending')]")
+        wait.until(EC.element_to_be_clickable((By.ID, "awsui-select-1-textbox")))
+        # status = driver.find_element_by_xpath("//span[@class='awsui-select-trigger-label'][contains(text(),'Pending')]")
         status.click()
 
 
@@ -150,19 +157,22 @@ for r in range(2, rows+1):
 
         ## Mentioning Number of Worked ASINs
 
+        wait.until(EC.element_to_be_clickable((By.ID, "awsui-input-9")))
         worked_asin = driver.find_element_by_id("awsui-input-9")
         worked_asin.clear()
         worked_asin.send_keys(made_asins)
 
+        time.sleep(2)
+
         ## Pressing 'OK' button for submit button
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='awsui-modal-dialog awsui-modal-expandtofit awsui-modal-size-max']//button[@class='awsui-button awsui-button-variant-primary awsui-hover-child-icons']")))
-        ok_button = driver.find_element_by_xpath("//div[@class='awsui-modal-dialog awsui-modal-expandtofit awsui-modal-size-max']//button[@class='awsui-button awsui-button-variant-primary awsui-hover-child-icons']")
+        wait.until(EC.element_to_be_clickable((By.XPATH, "(//div[@class='awsui-modal-footer awsui-util-container-footer']//span[@class='awsui-util-f-r'])[last()]//span[contains(text(),'Ok')]")))
+        ok_button = driver.find_element_by_xpath("(//div[@class='awsui-modal-footer awsui-util-container-footer']//span[@class='awsui-util-f-r'])[last()]//span[contains(text(),'Ok')]")
         ok_button.click()
         # time.sleep(1)
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="WinstonApp"]/div/div[8]/div/div[3]/div[2]/awsui-button/button/span')))
-        update_t1 = driver.find_element_by_xpath('//*[@id="WinstonApp"]/div/div[8]/div/div[3]/div[2]/awsui-button/button/span')
+        wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Update task']")))
+        update_t1 = driver.find_element_by_xpath("//span[text()='Update task']")
         update_t1.click()
         time.sleep(3)
 
@@ -209,7 +219,7 @@ for r in range(2, rows+1):
         save_button.click()
 
         # Closing the Winston Case
-
+        #Todo: There is reassign picture showing now.
         wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Close')]")))
         close_button = driver.find_element_by_xpath("//span[contains(text(),'Close')]")
         close_button.click()
@@ -226,8 +236,8 @@ for r in range(2, rows+1):
         # time.sleep(1)
 
         wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="WinstonApp"]/div/div[9]/awsui-modal/div[2]/div/div/div[3]/span/span/awsui-button[2]/button/span')))
-        ok_button = driver.find_element_by_xpath('//*[@id="WinstonApp"]/div/div[9]/awsui-modal/div[2]/div/div/div[3]/span/span/awsui-button[2]/button/span')
-        ok_button.click()
+        press_ok = driver.find_element_by_xpath('//*[@id="WinstonApp"]/div/div[9]/awsui-modal/div[2]/div/div/div[3]/span/span/awsui-button[2]/button/span')
+        press_ok.click()
         time.sleep(3)
 
         Excel_utils.writeData(url.case_Data, 'Result', r, 1, vendor)
